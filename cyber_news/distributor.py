@@ -206,11 +206,11 @@ def get_report_url(config: dict, date: datetime | None = None) -> str:
         date = datetime.now()
 
     base_url = config.get("github_pages", {}).get("base_url", "")
+    output_dir = config.get("output", {}).get("dir", "output")
     if base_url:
-        return f"{base_url}/{date.year}/{date.month:02d}/{date.day:02d}.html"
+        return f"{base_url}/{output_dir}/{date.year}/{date.month:02d}/{date.day:02d}.html"
 
-    output_dir = Path(config.get("output", {}).get("dir", "output"))
-    return str(output_dir / str(date.year) / f"{date.month:02d}" / f"{date.day:02d}.html")
+    return str(Path(output_dir) / str(date.year) / f"{date.month:02d}" / f"{date.day:02d}.html")
 
 
 def distribute(
