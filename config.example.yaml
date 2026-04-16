@@ -1,0 +1,75 @@
+# 사이버전 일일 브리핑 설정 파일
+
+# RSS 뉴스 소스 목록
+sources:
+  - name: "The Hacker News"
+    url: "https://feeds.feedburner.com/TheHackersNews"
+    lang: "en"
+  - name: "SecurityWeek"
+    url: "https://www.securityweek.com/feed/"
+    lang: "en"
+  - name: "BleepingComputer"
+    url: "https://www.bleepingcomputer.com/feed/"
+    lang: "en"
+  - name: "Cybersecurity Dive"
+    url: "https://www.cybersecuritydive.com/feeds/news/"
+    lang: "en"
+  - name: "보안뉴스"
+    url: "https://www.boannews.com/media/news_rss.xml"
+    lang: "ko"
+  - name: "데일리시큐"
+    url: "https://www.dailysecu.com/rss/allArticle.xml"
+    lang: "ko"
+
+# 키워드 필터 (ANY 매칭, 대소문자 무시)
+keywords:
+  ko:
+    - "사이버전"
+    - "사이버작전"
+    - "사이버사령부"
+    - "사이버공격"
+    - "해킹"
+    - "APT"
+    - "랜섬웨어"
+    - "취약점"
+    - "보안위협"
+    - "국가해킹"
+  en:
+    - "cyber warfare"
+    - "cyber attack"
+    - "cyber command"
+    - "cyber operation"
+    - "hacking"
+    - "APT"
+    - "ransomware"
+    - "vulnerability"
+    - "nation-state"
+    - "threat actor"
+
+# Claude Code CLI 설정
+generator:
+  batch_size: 10
+  timeout_seconds: 120
+  max_retries: 1
+
+# 카카오톡 설정
+kakao:
+  rest_api_key: "YOUR_KAKAO_REST_API_KEY"
+  client_secret: "YOUR_CLIENT_SECRET"  # 카카오 개발자 콘솔 > 보안 탭에서 확인
+  # 토큰은 kakao_token.json에 자동 저장됨
+
+# GitHub Pages 설정
+github_pages:
+  repo: "YOUR_USERNAME/cyber-news"
+  branch: "gh-pages"
+  base_url: "https://YOUR_USERNAME.github.io/cyber-news"
+
+# 출력 설정
+output:
+  dir: "output"
+  generate_pdf: true
+  generate_index: true
+
+# 중복 제거 설정
+dedup:
+  title_similarity_threshold: 0.8
