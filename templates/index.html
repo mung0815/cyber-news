@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>사이버전 일일 브리핑 아카이브</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 24px;
+    color: #1a1a1a;
+    line-height: 1.6;
+  }
+  header {
+    background: #1a1a2e;
+    color: white;
+    padding: 24px;
+    text-align: center;
+    margin: -24px -24px 24px;
+  }
+  header h1 { font-family: Georgia, serif; font-size: 1.6rem; }
+  header p { opacity: 0.8; font-size: 0.9rem; margin-top: 8px; }
+  .month-group { margin-bottom: 32px; }
+  .month-group h2 {
+    font-size: 1.1rem;
+    color: #1a1a2e;
+    border-bottom: 2px solid #1a1a2e;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+  }
+  .report-list { list-style: none; }
+  .report-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+  }
+  .report-list a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .report-list a:hover { text-decoration: underline; }
+  .report-list .count {
+    color: #999;
+    font-size: 0.85rem;
+    margin-left: 8px;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1>사이버전 일일 브리핑 아카이브</h1>
+    <p>Cyber Warfare Daily Briefing Archive</p>
+  </header>
+
+  {% for month, reports in months.items() %}
+  <div class="month-group">
+    <h2>{{ month }}</h2>
+    <ul class="report-list">
+      {% for report in reports %}
+      <li>
+        <a href="{{ report.url }}">{{ report.date_str }}</a>
+        <span class="count">{{ report.article_count }}건</span>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+</body>
+</html>

@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>사이버전 일일 브리핑 - 2026년 4월 16일 (목)</title>
+<style>
+  :root {
+    --header-bg: #1a1a2e;
+    --body-bg: #ffffff;
+    --text-primary: #1a1a1a;
+    --text-secondary: #555555;
+    --border: #e0e0e0;
+    --cat-attack: #e74c3c;
+    --cat-nation: #3498db;
+    --cat-policy: #2ecc71;
+    --cat-tech: #f1c40f;
+    --impact-high: #e74c3c;
+    --impact-medium: #f39c12;
+    --impact-low: #95a5a6;
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-xxl: 48px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--body-bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  header {
+    background: var(--header-bg);
+    color: white;
+    padding: var(--spacing-xl) var(--spacing-lg);
+    text-align: center;
+  }
+
+  header h1 {
+    font-family: Georgia, 'Noto Serif KR', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  header .subtitle {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  header .date-line {
+    margin-top: var(--spacing-sm);
+    font-size: 0.95rem;
+    opacity: 0.9;
+    border-top: 1px solid rgba(255,255,255,0.3);
+    padding-top: var(--spacing-sm);
+  }
+
+  .fallback-banner {
+    background: #fff3cd;
+    color: #856404;
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-align: center;
+    font-size: 0.9rem;
+    border-bottom: 2px solid #ffc107;
+  }
+
+  .executive-summary {
+    background: #f8f9fa;
+    border-left: 4px solid var(--header-bg);
+    margin: var(--spacing-lg);
+    padding: var(--spacing-lg);
+  }
+
+  .executive-summary h2 {
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--header-bg);
+  }
+
+  .executive-summary ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .executive-summary li {
+    padding: var(--spacing-xs) 0;
+    padding-left: var(--spacing-lg);
+    position: relative;
+  }
+
+  .executive-summary li::before {
+    content: "★";
+    position: absolute;
+    left: 0;
+    color: var(--header-bg);
+  }
+
+  .categories {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+    padding: 0 var(--spacing-lg) var(--spacing-lg);
+  }
+
+  .category {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .category-header {
+    padding: var(--spacing-sm) var(--spacing-md);
+    color: white;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  .category-header.cyber_attack { background: var(--cat-attack); }
+  .category-header.nation_state { background: var(--cat-nation); }
+  .category-header.policy { background: var(--cat-policy); }
+  .category-header.tech { background: var(--cat-tech); }
+
+  article {
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--border);
+  }
+
+  article:last-child { border-bottom: none; }
+
+  article h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+    line-height: 1.4;
+  }
+
+  article h3 a {
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  article h3 a:hover { text-decoration: underline; }
+
+  article .summary {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  article .meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+  }
+
+  .impact-bar {
+    display: inline-flex;
+    gap: 2px;
+    margin-right: var(--spacing-xs);
+  }
+
+  .impact-bar span {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+  }
+
+  .impact-bar.high span { background: var(--impact-high); }
+  .impact-bar.high span:nth-child(n+5) { background: #ddd; }
+  .impact-bar.medium span { background: var(--impact-medium); }
+  .impact-bar.medium span:nth-child(n+4) { background: #ddd; }
+  .impact-bar.low span { background: var(--impact-low); }
+  .impact-bar.low span:nth-child(n+3) { background: #ddd; }
+
+  .impact-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .impact-label.high { color: var(--impact-high); }
+  .impact-label.medium { color: var(--impact-medium); }
+  .impact-label.low { color: var(--impact-low); }
+
+  .links-section {
+    margin: var(--spacing-lg);
+    padding-top: var(--spacing-md);
+    border-top: 2px solid var(--header-bg);
+  }
+
+  .links-section h2 {
+    font-size: 1rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--header-bg);
+  }
+
+  .links-section ol {
+    padding-left: var(--spacing-lg);
+    font-size: 0.85rem;
+  }
+
+  .links-section li {
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .links-section a {
+    color: var(--cat-nation);
+    text-decoration: none;
+  }
+
+  .links-section a:hover { text-decoration: underline; }
+
+  footer {
+    background: var(--header-bg);
+    color: rgba(255,255,255,0.7);
+    text-align: center;
+    padding: var(--spacing-md);
+    font-size: 0.8rem;
+    margin-top: var(--spacing-lg);
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: var(--spacing-xxl);
+    color: var(--text-secondary);
+  }
+
+  .empty-state p { font-size: 1.1rem; margin-bottom: var(--spacing-sm); }
+
+  /* 모바일 반응형 */
+  @media (max-width: 768px) {
+    header h1 { font-size: 1.4rem; }
+    .categories { grid-template-columns: 1fr; }
+    .category { margin-bottom: 0; }
+    .executive-summary { margin: var(--spacing-md); padding: var(--spacing-md); }
+    .links-section { margin: var(--spacing-md); }
+  }
+
+  /* 인쇄 최적화 */
+  @media print {
+    body { max-width: none; }
+    header { background: white !important; color: black !important; border-bottom: 3px solid black; }
+    header .subtitle { color: #333; }
+    .categories { grid-template-columns: 1fr; }
+    .category-header { color: black !important; background: #eee !important; }
+    .fallback-banner { background: #eee !important; color: black !important; }
+    footer { background: white !important; color: black !important; border-top: 1px solid black; }
+    a::after { content: " (" attr(href) ")"; font-size: 0.7rem; color: #666; }
+    .impact-bar span { border: 1px solid #999; }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1>사이버전 일일 브리핑</h1>
+    <div class="subtitle">Cyber Warfare Daily Briefing</div>
+    <div class="date-line">2026년 4월 16일 (목) | 제3호 | 소스: 6개</div>
+  </header>
+
+  
+
+  
+
+  <section class="executive-summary">
+    <h2>★ 오늘의 핵심 (Executive Summary)</h2>
+    <ul>
+      
+      <li>Microsoft, SAP, Adobe, Fortinet 등 주요 벤더 제품에서 다수의 치명적 취약점이 발견되어 긴급 패치가 배포되었으며, CISA는 6개 취약점을 실제 악용 목록에 추가함</li>
+      
+      <li>북한 APT37이 페이스북 소셜 엔지니어링을 통해 RokRAT 악성코드를 배포하는 새로운 다단계 공격 캠페인을 전개 중</li>
+      
+      <li>n8n 자동화 플랫폼 악용, Mirax Android RAT의 Meta 광고 유포, CPUID 공급망 침해 등 신뢰 인프라를 악용한 공격이 급증</li>
+      
+      <li>Adobe Acrobat Reader 제로데이 취약점이 2025년 12월부터 악용되어 왔으며, 긴급 패치가 배포됨</li>
+      
+      <li>러시아 APT28이 PRISMEX 악성코드와 SOHO 라우터 DNS 하이재킹으로 우크라이나·NATO 동맹국을 집중 공격 중</li>
+      
+    </ul>
+  </section>
+
+  <div class="categories">
+    
+    
+    
+    <section class="category">
+      <div class="category-header cyber_attack">🔴 사이버공격/사건</div>
+      
+      <article>
+        <h3><a href="https://thehackernews.com/2026/04/mirax-android-rat-turns-devices-into.html" target="_blank" rel="noopener">Mirax Android RAT, Meta 광고 통해 22만 계정 도달하며 SOCKS5 프록시로 기기 악용</a></h3>
+        
+        <p class="summary">신종 Android 원격접속 트로이목마 Mirax가 Facebook, Instagram 등 Meta 광고를 통해 스페인어권 국가를 대상으로 22만 이상의 계정에 도달했다. 감염된 기기를 SOCKS5 프록시로 전환하는 고급 RAT 기능을 탑재하고 있다.</p>
+        
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>
+            <span class="impact-bar high">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label high">
+              높음
+            </span>
+          </span>
+        </div>
+      </article>
+      
+      <article>
+        <h3><a href="https://thehackernews.com/2026/04/showdoc-rce-flaw-cve-2025-0520-actively.html" target="_blank" rel="noopener">ShowDoc RCE 취약점(CVE-2025-0520), 미패치 서버 대상 실제 악용 중</a></h3>
+        
+        <p class="summary">중국에서 인기 있는 문서 관리 협업 서비스 ShowDoc에서 CVSS 9.4점의 원격 코드 실행 취약점이 실제 악용되고 있다. 미패치 서버가 공격 대상이 되고 있어 즉시 업데이트가 권장된다.</p>
+        
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>
+            <span class="impact-bar high">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label high">
+              높음
+            </span>
+          </span>
+        </div>
+      </article>
+      
+      <article>
+        <h3><a href="https://thehackernews.com/2026/04/cpuid-breach-distributes-stx-rat-via.html" target="_blank" rel="noopener">CPUID 웹사이트 침해, 트로이목마화된 CPU-Z·HWMonitor로 STX RAT 유포</a></h3>
+        
+        <p class="summary">인기 하드웨어 모니터링 도구 CPU-Z, HWMonitor을 호스팅하는 CPUID 웹사이트가 24시간 미만 동안 침해되어 악성 실행파일이 배포되었다. 공급망 공격을 통해 STX RAT 원격접속 트로이목마가 유포되었으며, 해당 기간 다운로드한 사용자는 감염 여부를 확인해야 한다.</p>
+        
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>
+            <span class="impact-bar high">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label high">
+              높음
+            </span>
+          </span>
+        </div>
+      </article>
+      
+      <article>
+        <h3><a href="https://thehackernews.com/2026/04/backdoored-smart-slider-3-pro-update.html" target="_blank" rel="noopener">Smart Slider 3 Pro 업데이트 시스템 해킹, 백도어 포함 버전 배포</a></h3>
+        
+        <p class="summary">공격자가 WordPress/Joomla용 Smart Slider 3 Pro 플러그인의 업데이트 서버를 장악하여 백도어가 포함된 악성 버전을 배포했다. WordPress 버전 3.5.1.35가 영향을 받으며, 공급망 공격의 전형적인 사례로 플러그인 사용자의 즉각적인 점검이 필요하다.</p>
+        
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>
+            <span class="impact-bar high">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label high">
+              높음
+            </span>
+          </span>
+        </div>
+      </article>
+      
+      <article>
+        <h3><a href="https://thehackernews.com/2026/04/adobe-reader-zero-day-exploited-via.html" target="_blank" rel="noopener">Adobe Reader 제로데이, 2025년 12월부터 악성 PDF로 악용되어 온 것으로 확인</a></h3>
+        
+        <p class="summary">EXPMON이 Adobe Reader의 미공개 제로데이 취약점이 악성 PDF 문서를 통해 최소 2025년 12월부터 악용되어 왔음을 밝혔다. 고도로 정교한 PDF 익스플로잇으로 평가되며, 장기간 탐지를 회피한 점에서 APT 수준의 위협으로 분석된다.</p>
+        
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>
+            <span class="impact-bar high">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label high">
+              높음
+            </span>
+          </span>
+        </div>
+      </article>
+      
+      <article>
+        <h3><a href="http://www.boannews.com/media/view.asp?idx=143203&amp;kind=&amp;sub_kind=" target="_blank" rel="noopener">KISA·경찰청, 중소기업 노리는 &#39;미드나이트&#39; 랜섬웨어 주의보</a></h3>
+        
+        <p class="summary">한국인터넷진흥원과 경찰청이 국내 중소기업을 대상으로 확산 중인 &#39;미드나이트&#39; 랜섬웨어에 대해 공동 주의보를 발령했다. 공문, 이력서, 견적서로 위장한 악성 이메일을 통해 감염 피해가 급증하고 있으며, 백업 데이터 동반 감염을 막기 위해 네트워크 분리된 오프라인 저장소 활용을 권고했다.</p>
+        
+        <div class="meta">
+          <span>보안뉴스</span>
+          <span>
+            <span class="impact-bar high">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label high">
+              높음
+            </span>
+          </span>
+        </div>
+      </article>
+      
+      <article>
+        <h3><a href="https://thehackernews.com/2026/04/n8n-webhooks-abused-since-october-2025.html" target="_blank" rel="noopener">n8n 웹훅 악용한 피싱 캠페인, 2025년 10월부터 악성코드 유포</a></h3>
+        
+        <p class="summary">위협 행위자들이 AI 워크플로우 자동화 플랫폼 n8n의 웹훅을 악용하여 정교한 피싱 캠페인을 수행하고 있다. 신뢰할 수 있는 인프라를 활용해 자동화된 이메일로 악성 페이로드를 전달하거나 기기 핑거프린팅을 수행하는 방식이다.</p>
+        
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>
+            <span class="impact-bar medium">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label medium">
+              중간
+            </span>
+          </span>
+        </div>
+      </article>
+      
+      <article>
+        <h3><a href="https://thehackernews.com/2026/04/weekly-recap-fiber-optic-spying-windows.html" target="_blank" rel="noopener">주간 보안 요약: 광섬유 스파이, Windows 루트킷, AI 취약점 탐지 등</a></h3>
+        
+        <p class="summary">PDF에 수개월간 잠복해 있던 치명적 제로데이 취약점과 국가 주도의 인프라 공격이 수면 위로 드러났다. 광섬유 도청, Windows 루트킷, AI를 활용한 취약점 탐지 등 다양한 보안 이슈를 종합적으로 다루고 있다.</p>
+        
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>
+            <span class="impact-bar medium">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label medium">
+              중간
+            </span>
+          </span>
+        </div>
+      </article>
+      
+      <article>
+        <h3><a href="https://www.securityweek.com/ransomware-hits-automotive-data-expert-autovista/" target="_blank" rel="noopener">자동차 데이터 분석 기업 Autovista, 랜섬웨어 공격 피해</a></h3>
+        
+        <p class="summary">자동차 분석 및 데이터 기업 Autovista가 랜섬웨어 공격을 받아 외부 전문가와 협력하여 사고를 조사하고 있다. 자동차 산업 데이터 공급망에 영향을 미칠 수 있는 사건이다.</p>
+        
+        <div class="meta">
+          <span>SecurityWeek</span>
+          <span>
+            <span class="impact-bar medium">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label medium">
+              중간
+            </span>
+          </span>
+        </div>
+      </article>
+      
+    </section>
+    
+    
+    
+    
+    <section class="category">
+      <div class="category-header nation_state">🔵 국가 사이버전 동향</div>
+      
+      <article>
+        <h3><a href="https://thehackernews.com/2026/04/north-koreas-apt37-uses-facebook-social.html" target="_blank" rel="noopener">북한 APT37, 페이스북 소셜 엔지니어링으로 RokRAT 악성코드 배포</a></h3>
+        
+        <p class="summary">북한 해킹 그룹 APT37(ScarCruft)이 페이스북에서 표적에게 친구 요청을 보내 신뢰를 구축한 뒤 RokRAT 악성코드를 전달하는 새로운 다단계 소셜 엔지니어링 캠페인을 수행하고 있다. 소셜 미디어를 악성코드 유포 경로로 활용하는 국가 지원 공격의 진화를 보여준다.</p>
+        
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>
+            <span class="impact-bar high">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label high">
+              높음
+            </span>
+          </span>
+        </div>
+      </article>
+      
+      <article>
+        <h3><a href="https://thehackernews.com/2026/04/apt28-deploys-prismex-malware-in.html" target="_blank" rel="noopener">러시아 APT28, 우크라이나·NATO 동맹국 대상 신규 PRISMEX 악성코드 배포</a></h3>
+        
+        <p class="summary">러시아 위협 그룹 APT28(Forest Blizzard)이 우크라이나와 NATO 동맹국을 표적으로 PRISMEX라는 새로운 악성코드를 배포하는 스피어피싱 캠페인을 전개 중이다. PRISMEX는 스테가노그래피와 COM 객체 모델을 결합한 고급 기법을 사용하여 탐지를 회피한다.</p>
+        
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>
+            <span class="impact-bar high">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label high">
+              높음
+            </span>
+          </span>
+        </div>
+      </article>
+      
+      <article>
+        <h3><a href="https://thehackernews.com/2026/04/n-korean-hackers-spread-1700-malicious.html" target="_blank" rel="noopener">북한 해커, npm·PyPI·Go·Rust에 악성 패키지 1,700개 유포</a></h3>
+        
+        <p class="summary">북한 연계 &#39;Contagious Interview&#39; 캠페인이 Go, Rust, PHP 생태계까지 공격 범위를 확장하며 1,700개의 악성 패키지를 배포했다. 정상 개발 도구를 사칭하여 개발자를 속이는 방식으로, 오픈소스 소프트웨어 공급망에 대한 체계적 위협이 심화되고 있다.</p>
+        
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>
+            <span class="impact-bar high">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label high">
+              높음
+            </span>
+          </span>
+        </div>
+      </article>
+      
+      <article>
+        <h3><a href="https://thehackernews.com/2026/04/russian-state-linked-apt28-exploits.html" target="_blank" rel="noopener">러시아 APT28, SOHO 라우터 해킹으로 글로벌 DNS 하이재킹 캠페인 수행</a></h3>
+        
+        <p class="summary">APT28이 보안이 취약한 MikroTik 및 TP-Link 라우터를 장악하여 악성 인프라로 전환하는 DNS 하이재킹 캠페인을 수행하고 있다. 소규모 사무실·가정용(SOHO) 라우터를 사이버 첩보 거점으로 활용하는 방식으로, 광범위한 네트워크 장비의 보안 점검이 시급하다.</p>
+        
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>
+            <span class="impact-bar high">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label high">
+              높음
+            </span>
+          </span>
+        </div>
+      </article>
+      
+      <article>
+        <h3><a href="https://thehackernews.com/2026/04/china-linked-storm-1175-exploits-zero.html" target="_blank" rel="noopener">중국 연계 Storm-1175, 제로데이 악용해 메두사 랜섬웨어 고속 배포</a></h3>
+        
+        <p class="summary">중국 기반 위협 행위자 Storm-1175가 제로데이 및 N-day 취약점을 무기화하여 인터넷 노출 시스템에 메두사 랜섬웨어를 고속으로 배포하고 있다. 높은 작전 템포로 취약한 시스템을 신속하게 침투하는 것이 특징이다.</p>
+        
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>
+            <span class="impact-bar high">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label high">
+              높음
+            </span>
+          </span>
+        </div>
+      </article>
+      
+      <article>
+        <h3><a href="https://www.bleepingcomputer.com/news/security/us-nationals-behind-north-korean-it-worker-laptop-farm-sent-to-prison/" target="_blank" rel="noopener">북한 IT 인력 &#39;노트북 팜&#39; 운영 도운 미국인 2명 실형 선고</a></h3>
+        
+        <p class="summary">북한 원격 IT 근로자들이 미국인으로 위장하여 포춘 500대 기업 포함 100개 이상의 미국 기업에 취업할 수 있도록 도운 미국 국적자 2명이 실형을 선고받았다. 북한의 IT 인력 위장 취업 위협의 심각성을 보여주는 사례이다.</p>
+        
+        <div class="meta">
+          <span>BleepingComputer</span>
+          <span>
+            <span class="impact-bar high">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label high">
+              높음
+            </span>
+          </span>
+        </div>
+      </article>
+      
+      <article>
+        <h3><a href="https://www.cybersecuritydive.com/news/critical-infrastucture-plcs-iran-hacking-censys/817209/" target="_blank" rel="noopener">이란 연계 해킹 캠페인, 약 4,000개 산업제어시스템 장치 취약점 노출</a></h3>
+        
+        <p class="summary">이란과 연계된 해킹 캠페인이 인터넷에 노출된 약 4,000개의 산업제어시스템(ICS) 장치를 표적으로 삼고 있다. 핵심 인프라의 PLC 장치가 직접적인 위협에 처해 있어 산업 시설의 긴급한 보안 점검이 필요하다.</p>
+        
+        <div class="meta">
+          <span>Cybersecurity Dive</span>
+          <span>
+            <span class="impact-bar high">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label high">
+              높음
+            </span>
+          </span>
+        </div>
+      </article>
+      
+      <article>
+        <h3><a href="https://thehackernews.com/2026/04/bitter-linked-hack-for-hire-campaign.html" target="_blank" rel="noopener">인도 정부 연계 Bitter 그룹, 중동·북아프리카 언론인 대상 해킹 캠페인</a></h3>
+        
+        <p class="summary">인도 정부와 연계된 것으로 의심되는 해킹 용병 그룹이 중동·북아프리카(MENA) 지역의 언론인, 활동가, 정부 관계자를 표적으로 삼았다. Access Now, Lookout, SMEX의 공동 조사로 확인되었으며, 국가 후원 감시 활동의 확산을 보여준다.</p>
+        
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>
+            <span class="impact-bar medium">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label medium">
+              중간
+            </span>
+          </span>
+        </div>
+      </article>
+      
+    </section>
+    
+    
+    
+    
+    <section class="category">
+      <div class="category-header policy">🟢 정책/규제</div>
+      
+      <article>
+        <h3><a href="https://thehackernews.com/2026/04/cisa-adds-6-known-exploited-flaws-in.html" target="_blank" rel="noopener">CISA, Fortinet·Microsoft·Adobe 소프트웨어의 실제 악용 취약점 6건 추가</a></h3>
+        
+        <p class="summary">미국 CISA가 Fortinet, Microsoft, Adobe 소프트웨어의 보안 취약점 6건을 실제 악용 증거를 근거로 KEV 카탈로그에 추가했다. CVE-2026-21643(CVSS 9.1) 등 고위험 취약점이 포함되어 연방 기관의 신속한 패치가 의무화된다.</p>
+        
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>
+            <span class="impact-bar high">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label high">
+              높음
+            </span>
+          </span>
+        </div>
+      </article>
+      
+      <article>
+        <h3><a href="https://www.bleepingcomputer.com/news/microsoft/microsoft-pays-23-million-for-cloud-and-ai-flaws-at-zero-day-quest/" target="_blank" rel="noopener">마이크로소프트, Zero Day Quest 해킹 대회에서 클라우드·AI 취약점에 230만 달러 보상 지급</a></h3>
+        
+        <p class="summary">마이크로소프트가 올해 Zero Day Quest 해킹 대회에서 약 700건의 취약점 보고를 접수하고 보안 연구자들에게 총 230만 달러를 지급했다. 클라우드 및 AI 관련 취약점 발견에 대한 보상으로, 보안 연구 생태계 활성화에 기여하고 있다.</p>
+        
+        <div class="meta">
+          <span>BleepingComputer</span>
+          <span>
+            <span class="impact-bar medium">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label medium">
+              중간
+            </span>
+          </span>
+        </div>
+      </article>
+      
+    </section>
+    
+    
+    
+    
+    <section class="category">
+      <div class="category-header tech">🟡 기술동향/취약점</div>
+      
+      <article>
+        <h3><a href="https://thehackernews.com/2026/04/critical-nginx-ui-vulnerability-cve.html" target="_blank" rel="noopener">nginx-ui 치명적 취약점(CVE-2026-33032) 실제 악용 중, Nginx 서버 완전 장악 가능</a></h3>
+        
+        <p class="summary">오픈소스 Nginx 관리 도구 nginx-ui에서 CVSS 9.8점의 인증 우회 취약점이 발견되어 실제 악용이 확인되었다. 이 취약점을 통해 공격자는 Nginx 서버를 완전히 장악할 수 있어 즉각적인 패치가 필요하다.</p>
+        
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>
+            <span class="impact-bar high">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label high">
+              높음
+            </span>
+          </span>
+        </div>
+      </article>
+      
+      <article>
+        <h3><a href="https://thehackernews.com/2026/04/april-patch-tuesday-fixes-critical.html" target="_blank" rel="noopener">4월 패치 튜즈데이: SAP, Adobe, Microsoft, Fortinet 등 치명적 취약점 일괄 수정</a></h3>
+        
+        <p class="summary">SAP, Adobe, Fortinet, Microsoft 등 주요 벤더 제품의 치명적 취약점들이 4월 패치 튜즈데이에서 수정되었다. SAP Business Planning and Consolidation의 SQL 인젝션 취약점이 가장 심각한 것으로 평가된다.</p>
+        
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>
+            <span class="impact-bar high">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label high">
+              높음
+            </span>
+          </span>
+        </div>
+      </article>
+      
+      <article>
+        <h3><a href="https://thehackernews.com/2026/04/microsoft-issues-patches-for-sharepoint.html" target="_blank" rel="noopener">Microsoft, SharePoint 제로데이 포함 169개 보안 취약점 패치 발표</a></h3>
+        
+        <p class="summary">Microsoft가 169개 보안 취약점에 대한 업데이트를 발표했으며, 이 중 하나는 실제 악용이 확인된 제로데이 취약점이다. 8개는 치명적 등급으로 분류되었으며, 역대 최대 규모의 월간 패치 배포에 해당한다.</p>
+        
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>
+            <span class="impact-bar high">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label high">
+              높음
+            </span>
+          </span>
+        </div>
+      </article>
+      
+      <article>
+        <h3><a href="https://thehackernews.com/2026/04/adobe-patches-actively-exploited.html" target="_blank" rel="noopener">Adobe, Acrobat Reader 실제 악용 중인 취약점 CVE-2026-34621 긴급 패치</a></h3>
+        
+        <p class="summary">Adobe가 Acrobat Reader의 치명적 보안 취약점에 대한 긴급 업데이트를 배포했다. CVE-2026-34621로 지정된 이 취약점은 CVSS 8.6점으로, 실제 공격에 활발히 악용되고 있어 즉각적인 패치 적용이 필요하다.</p>
+        
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>
+            <span class="impact-bar high">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label high">
+              높음
+            </span>
+          </span>
+        </div>
+      </article>
+      
+      <article>
+        <h3><a href="https://thehackernews.com/2026/04/marimo-rce-flaw-cve-2026-39987.html" target="_blank" rel="noopener">Marimo RCE 취약점 CVE-2026-39987, 공개 10시간 만에 악용 시작</a></h3>
+        
+        <p class="summary">오픈소스 Python 노트북 Marimo에서 CVSS 9.3점의 사전 인증 원격 코드 실행 취약점이 발견되었다. Sysdig에 따르면 공개 후 불과 10시간 만에 실제 악용이 확인되어 데이터 과학 환경에 심각한 위협이 되고 있다.</p>
+        
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>
+            <span class="impact-bar high">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label high">
+              높음
+            </span>
+          </span>
+        </div>
+      </article>
+      
+      <article>
+        <h3><a href="https://thehackernews.com/2026/04/engagelab-sdk-flaw-exposed-50m-android.html" target="_blank" rel="noopener">EngageLab SDK 취약점, 안드로이드 사용자 5천만 명 노출 — 암호화폐 지갑 3천만 건 포함</a></h3>
+        
+        <p class="summary">서드파티 Android SDK인 EngageLab에서 동일 기기 내 앱들이 Android 보안 경계를 우회할 수 있는 취약점이 발견되었다. 암호화폐 지갑 앱 3천만 건을 포함해 총 5천만 사용자가 영향권에 있었으며, 현재는 패치가 완료되었다.</p>
+        
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>
+            <span class="impact-bar high">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label high">
+              높음
+            </span>
+          </span>
+        </div>
+      </article>
+      
+      <article>
+        <h3><a href="https://thehackernews.com/2026/04/docker-cve-2026-34040-lets-attackers.html" target="_blank" rel="noopener">Docker 취약점 CVE-2026-34040, 인증 우회로 호스트 접근 가능</a></h3>
+        
+        <p class="summary">Docker Engine에서 인증 플러그인(AuthZ)을 우회할 수 있는 고위험 취약점이 공개되었다. CVSS 8.8점의 CVE-2026-34040은 이전 취약점(CVE-2024-41110)의 불완전한 수정에서 비롯되었으며, 특정 조건에서 호스트 시스템 접근이 가능하다.</p>
+        
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>
+            <span class="impact-bar high">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label high">
+              높음
+            </span>
+          </span>
+        </div>
+      </article>
+      
+      <article>
+        <h3><a href="https://thehackernews.com/2026/04/flowise-ai-agent-builder-under-active.html" target="_blank" rel="noopener">Flowise AI 에이전트 빌더, CVSS 10.0 원격코드실행 취약점 실제 악용 중 — 12,000개 이상 인스턴스 노출</a></h3>
+        
+        <p class="summary">오픈소스 AI 플랫폼 Flowise에서 최고 심각도(CVSS 10.0)의 코드 인젝션 취약점 CVE-2025-59528이 발견되어 실제 공격에 악용되고 있다. 12,000개 이상의 인스턴스가 인터넷에 노출되어 있어 원격 코드 실행 위험이 매우 높다.</p>
+        
+        <div class="meta">
+          <span>The Hacker News</span>
+          <span>
+            <span class="impact-bar high">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label high">
+              높음
+            </span>
+          </span>
+        </div>
+      </article>
+      
+      <article>
+        <h3><a href="https://www.securityweek.com/exploited-vulnerability-exposes-nginx-servers-to-hacking/" target="_blank" rel="noopener">Nginx UI 관리 도구 치명적 취약점 악용으로 서버 해킹 위험</a></h3>
+        
+        <p class="summary">해커들이 Nginx UI 관리 도구의 치명적 원격 탈취 취약점 CVE-2026-33032을 악용하고 있다. 이 취약점을 통해 인증 없이 서버를 완전히 장악할 수 있어 즉각적인 업데이트가 필요하다.</p>
+        
+        <div class="meta">
+          <span>SecurityWeek</span>
+          <span>
+            <span class="impact-bar high">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label high">
+              높음
+            </span>
+          </span>
+        </div>
+      </article>
+      
+      <article>
+        <h3><a href="https://www.bleepingcomputer.com/news/security/critical-nginx-ui-auth-bypass-flaw-now-actively-exploited-in-the-wild/" target="_blank" rel="noopener">Nginx UI 인증 우회 치명적 취약점, 실제 공격에 적극 악용 중</a></h3>
+        
+        <p class="summary">MCP(Model Context Protocol) 지원이 포함된 Nginx UI의 치명적 인증 우회 취약점이 실제 공격에서 악용되어 인증 없이 서버를 완전히 탈취할 수 있다. 해당 소프트웨어 사용 조직은 즉시 패치를 적용해야 한다.</p>
+        
+        <div class="meta">
+          <span>BleepingComputer</span>
+          <span>
+            <span class="impact-bar high">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label high">
+              높음
+            </span>
+          </span>
+        </div>
+      </article>
+      
+      <article>
+        <h3><a href="https://www.bleepingcomputer.com/news/security/cisa-flags-windows-task-host-vulnerability-as-exploited-in-attacks/" target="_blank" rel="noopener">CISA, Windows Task Host 권한 상승 취약점을 실제 악용 목록에 추가</a></h3>
+        
+        <p class="summary">CISA가 미국 정부 기관에 Windows Task Host 권한 상승 취약점에 대한 보안 조치를 경고했다. 이 취약점을 통해 공격자가 SYSTEM 권한을 획득할 수 있으며, 실제 공격에 악용되고 있다.</p>
+        
+        <div class="meta">
+          <span>BleepingComputer</span>
+          <span>
+            <span class="impact-bar high">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label high">
+              높음
+            </span>
+          </span>
+        </div>
+      </article>
+      
+      <article>
+        <h3><a href="https://www.cybersecuritydive.com/news/cisa-second-critical-flaw-ivanti-epmm-exploited/817080/" target="_blank" rel="noopener">CISA, Ivanti EPMM 두 번째 치명적 취약점을 적극 악용 목록에 추가</a></h3>
+        
+        <p class="summary">CISA가 Ivanti EPMM의 코드 인젝션 취약점을 적극 악용 취약점 카탈로그에 추가했다. 이전에 발견된 취약점과 유사한 성격으로, Ivanti 제품 사용 조직은 즉시 패치를 적용해야 한다.</p>
+        
+        <div class="meta">
+          <span>Cybersecurity Dive</span>
+          <span>
+            <span class="impact-bar high">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label high">
+              높음
+            </span>
+          </span>
+        </div>
+      </article>
+      
+      <article>
+        <h3><a href="https://www.dailysecu.com/news/articleView.html?idxno=206262" target="_blank" rel="noopener">[이혁중 CISO 보안칼럼] AI가 열어준 판도라의 상자</a></h3>
+        
+        <p class="summary">AI가 취약점 발견을 넘어 익스플로잇 자동 생성 및 자발적 공격까지 가능한 수준에 도달했음을 경고하는 보안 칼럼이다. 실제 발생했거나 발생 가능한 AI 기반 공격 사례를 통해 AI의 어두운 면을 조명하며, 보안 담당자들에게 선제적 대비의 필요성을 강조했다.</p>
+        
+        <div class="meta">
+          <span>데일리시큐</span>
+          <span>
+            <span class="impact-bar medium">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label medium">
+              중간
+            </span>
+          </span>
+        </div>
+      </article>
+      
+    </section>
+    
+    
+  </div>
+
+  <section class="links-section">
+    <h2>원문 링크 목록</h2>
+    <ol>
+      
+      <li><a href="https://thehackernews.com/2026/04/critical-nginx-ui-vulnerability-cve.html" target="_blank" rel="noopener">nginx-ui 치명적 취약점(CVE-2026-33032) 실제 악용 중, Nginx 서버 완전 장악 가능</a> — The Hacker News</li>
+      
+      <li><a href="https://thehackernews.com/2026/04/april-patch-tuesday-fixes-critical.html" target="_blank" rel="noopener">4월 패치 튜즈데이: SAP, Adobe, Microsoft, Fortinet 등 치명적 취약점 일괄 수정</a> — The Hacker News</li>
+      
+      <li><a href="https://thehackernews.com/2026/04/microsoft-issues-patches-for-sharepoint.html" target="_blank" rel="noopener">Microsoft, SharePoint 제로데이 포함 169개 보안 취약점 패치 발표</a> — The Hacker News</li>
+      
+      <li><a href="https://thehackernews.com/2026/04/mirax-android-rat-turns-devices-into.html" target="_blank" rel="noopener">Mirax Android RAT, Meta 광고 통해 22만 계정 도달하며 SOCKS5 프록시로 기기 악용</a> — The Hacker News</li>
+      
+      <li><a href="https://thehackernews.com/2026/04/showdoc-rce-flaw-cve-2025-0520-actively.html" target="_blank" rel="noopener">ShowDoc RCE 취약점(CVE-2025-0520), 미패치 서버 대상 실제 악용 중</a> — The Hacker News</li>
+      
+      <li><a href="https://thehackernews.com/2026/04/cisa-adds-6-known-exploited-flaws-in.html" target="_blank" rel="noopener">CISA, Fortinet·Microsoft·Adobe 소프트웨어의 실제 악용 취약점 6건 추가</a> — The Hacker News</li>
+      
+      <li><a href="https://thehackernews.com/2026/04/north-koreas-apt37-uses-facebook-social.html" target="_blank" rel="noopener">북한 APT37, 페이스북 소셜 엔지니어링으로 RokRAT 악성코드 배포</a> — The Hacker News</li>
+      
+      <li><a href="https://thehackernews.com/2026/04/cpuid-breach-distributes-stx-rat-via.html" target="_blank" rel="noopener">CPUID 웹사이트 침해, 트로이목마화된 CPU-Z·HWMonitor로 STX RAT 유포</a> — The Hacker News</li>
+      
+      <li><a href="https://thehackernews.com/2026/04/adobe-patches-actively-exploited.html" target="_blank" rel="noopener">Adobe, Acrobat Reader 실제 악용 중인 취약점 CVE-2026-34621 긴급 패치</a> — The Hacker News</li>
+      
+      <li><a href="https://thehackernews.com/2026/04/marimo-rce-flaw-cve-2026-39987.html" target="_blank" rel="noopener">Marimo RCE 취약점 CVE-2026-39987, 공개 10시간 만에 악용 시작</a> — The Hacker News</li>
+      
+      <li><a href="https://thehackernews.com/2026/04/backdoored-smart-slider-3-pro-update.html" target="_blank" rel="noopener">Smart Slider 3 Pro 업데이트 시스템 해킹, 백도어 포함 버전 배포</a> — The Hacker News</li>
+      
+      <li><a href="https://thehackernews.com/2026/04/engagelab-sdk-flaw-exposed-50m-android.html" target="_blank" rel="noopener">EngageLab SDK 취약점, 안드로이드 사용자 5천만 명 노출 — 암호화폐 지갑 3천만 건 포함</a> — The Hacker News</li>
+      
+      <li><a href="https://thehackernews.com/2026/04/adobe-reader-zero-day-exploited-via.html" target="_blank" rel="noopener">Adobe Reader 제로데이, 2025년 12월부터 악성 PDF로 악용되어 온 것으로 확인</a> — The Hacker News</li>
+      
+      <li><a href="https://thehackernews.com/2026/04/apt28-deploys-prismex-malware-in.html" target="_blank" rel="noopener">러시아 APT28, 우크라이나·NATO 동맹국 대상 신규 PRISMEX 악성코드 배포</a> — The Hacker News</li>
+      
+      <li><a href="https://thehackernews.com/2026/04/n-korean-hackers-spread-1700-malicious.html" target="_blank" rel="noopener">북한 해커, npm·PyPI·Go·Rust에 악성 패키지 1,700개 유포</a> — The Hacker News</li>
+      
+      <li><a href="https://thehackernews.com/2026/04/russian-state-linked-apt28-exploits.html" target="_blank" rel="noopener">러시아 APT28, SOHO 라우터 해킹으로 글로벌 DNS 하이재킹 캠페인 수행</a> — The Hacker News</li>
+      
+      <li><a href="https://thehackernews.com/2026/04/docker-cve-2026-34040-lets-attackers.html" target="_blank" rel="noopener">Docker 취약점 CVE-2026-34040, 인증 우회로 호스트 접근 가능</a> — The Hacker News</li>
+      
+      <li><a href="https://thehackernews.com/2026/04/china-linked-storm-1175-exploits-zero.html" target="_blank" rel="noopener">중국 연계 Storm-1175, 제로데이 악용해 메두사 랜섬웨어 고속 배포</a> — The Hacker News</li>
+      
+      <li><a href="https://thehackernews.com/2026/04/flowise-ai-agent-builder-under-active.html" target="_blank" rel="noopener">Flowise AI 에이전트 빌더, CVSS 10.0 원격코드실행 취약점 실제 악용 중 — 12,000개 이상 인스턴스 노출</a> — The Hacker News</li>
+      
+      <li><a href="https://www.securityweek.com/exploited-vulnerability-exposes-nginx-servers-to-hacking/" target="_blank" rel="noopener">Nginx UI 관리 도구 치명적 취약점 악용으로 서버 해킹 위험</a> — SecurityWeek</li>
+      
+      <li><a href="https://www.bleepingcomputer.com/news/security/us-nationals-behind-north-korean-it-worker-laptop-farm-sent-to-prison/" target="_blank" rel="noopener">북한 IT 인력 &#39;노트북 팜&#39; 운영 도운 미국인 2명 실형 선고</a> — BleepingComputer</li>
+      
+      <li><a href="https://www.bleepingcomputer.com/news/security/critical-nginx-ui-auth-bypass-flaw-now-actively-exploited-in-the-wild/" target="_blank" rel="noopener">Nginx UI 인증 우회 치명적 취약점, 실제 공격에 적극 악용 중</a> — BleepingComputer</li>
+      
+      <li><a href="https://www.bleepingcomputer.com/news/security/cisa-flags-windows-task-host-vulnerability-as-exploited-in-attacks/" target="_blank" rel="noopener">CISA, Windows Task Host 권한 상승 취약점을 실제 악용 목록에 추가</a> — BleepingComputer</li>
+      
+      <li><a href="https://www.cybersecuritydive.com/news/critical-infrastucture-plcs-iran-hacking-censys/817209/" target="_blank" rel="noopener">이란 연계 해킹 캠페인, 약 4,000개 산업제어시스템 장치 취약점 노출</a> — Cybersecurity Dive</li>
+      
+      <li><a href="https://www.cybersecuritydive.com/news/cisa-second-critical-flaw-ivanti-epmm-exploited/817080/" target="_blank" rel="noopener">CISA, Ivanti EPMM 두 번째 치명적 취약점을 적극 악용 목록에 추가</a> — Cybersecurity Dive</li>
+      
+      <li><a href="http://www.boannews.com/media/view.asp?idx=143203&amp;kind=&amp;sub_kind=" target="_blank" rel="noopener">KISA·경찰청, 중소기업 노리는 &#39;미드나이트&#39; 랜섬웨어 주의보</a> — 보안뉴스</li>
+      
+      <li><a href="https://thehackernews.com/2026/04/n8n-webhooks-abused-since-october-2025.html" target="_blank" rel="noopener">n8n 웹훅 악용한 피싱 캠페인, 2025년 10월부터 악성코드 유포</a> — The Hacker News</li>
+      
+      <li><a href="https://thehackernews.com/2026/04/weekly-recap-fiber-optic-spying-windows.html" target="_blank" rel="noopener">주간 보안 요약: 광섬유 스파이, Windows 루트킷, AI 취약점 탐지 등</a> — The Hacker News</li>
+      
+      <li><a href="https://thehackernews.com/2026/04/bitter-linked-hack-for-hire-campaign.html" target="_blank" rel="noopener">인도 정부 연계 Bitter 그룹, 중동·북아프리카 언론인 대상 해킹 캠페인</a> — The Hacker News</li>
+      
+      <li><a href="https://www.securityweek.com/ransomware-hits-automotive-data-expert-autovista/" target="_blank" rel="noopener">자동차 데이터 분석 기업 Autovista, 랜섬웨어 공격 피해</a> — SecurityWeek</li>
+      
+      <li><a href="https://www.bleepingcomputer.com/news/microsoft/microsoft-pays-23-million-for-cloud-and-ai-flaws-at-zero-day-quest/" target="_blank" rel="noopener">마이크로소프트, Zero Day Quest 해킹 대회에서 클라우드·AI 취약점에 230만 달러 보상 지급</a> — BleepingComputer</li>
+      
+      <li><a href="https://www.dailysecu.com/news/articleView.html?idxno=206262" target="_blank" rel="noopener">[이혁중 CISO 보안칼럼] AI가 열어준 판도라의 상자</a> — 데일리시큐</li>
+      
+    </ol>
+  </section>
+  
+
+  <footer>
+    발행: cyber-news v1.0 | 2026년 4월 16일 (목) | 32건 수집
+  </footer>
+</body>
+</html>

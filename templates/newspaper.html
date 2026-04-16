@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>사이버전 일일 브리핑 - {{ date_str }}</title>
+<style>
+  :root {
+    --header-bg: #1a1a2e;
+    --body-bg: #ffffff;
+    --text-primary: #1a1a1a;
+    --text-secondary: #555555;
+    --border: #e0e0e0;
+    --cat-attack: #e74c3c;
+    --cat-nation: #3498db;
+    --cat-policy: #2ecc71;
+    --cat-tech: #f1c40f;
+    --impact-high: #e74c3c;
+    --impact-medium: #f39c12;
+    --impact-low: #95a5a6;
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-xxl: 48px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--body-bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  header {
+    background: var(--header-bg);
+    color: white;
+    padding: var(--spacing-xl) var(--spacing-lg);
+    text-align: center;
+  }
+
+  header h1 {
+    font-family: Georgia, 'Noto Serif KR', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  header .subtitle {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  header .date-line {
+    margin-top: var(--spacing-sm);
+    font-size: 0.95rem;
+    opacity: 0.9;
+    border-top: 1px solid rgba(255,255,255,0.3);
+    padding-top: var(--spacing-sm);
+  }
+
+  .fallback-banner {
+    background: #fff3cd;
+    color: #856404;
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-align: center;
+    font-size: 0.9rem;
+    border-bottom: 2px solid #ffc107;
+  }
+
+  .executive-summary {
+    background: #f8f9fa;
+    border-left: 4px solid var(--header-bg);
+    margin: var(--spacing-lg);
+    padding: var(--spacing-lg);
+  }
+
+  .executive-summary h2 {
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--header-bg);
+  }
+
+  .executive-summary ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .executive-summary li {
+    padding: var(--spacing-xs) 0;
+    padding-left: var(--spacing-lg);
+    position: relative;
+  }
+
+  .executive-summary li::before {
+    content: "★";
+    position: absolute;
+    left: 0;
+    color: var(--header-bg);
+  }
+
+  .categories {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+    padding: 0 var(--spacing-lg) var(--spacing-lg);
+  }
+
+  .category {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .category-header {
+    padding: var(--spacing-sm) var(--spacing-md);
+    color: white;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  .category-header.cyber_attack { background: var(--cat-attack); }
+  .category-header.nation_state { background: var(--cat-nation); }
+  .category-header.policy { background: var(--cat-policy); }
+  .category-header.tech { background: var(--cat-tech); }
+
+  article {
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--border);
+  }
+
+  article:last-child { border-bottom: none; }
+
+  article h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+    line-height: 1.4;
+  }
+
+  article h3 a {
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  article h3 a:hover { text-decoration: underline; }
+
+  article .summary {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  article .meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+  }
+
+  .impact-bar {
+    display: inline-flex;
+    gap: 2px;
+    margin-right: var(--spacing-xs);
+  }
+
+  .impact-bar span {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+  }
+
+  .impact-bar.high span { background: var(--impact-high); }
+  .impact-bar.high span:nth-child(n+5) { background: #ddd; }
+  .impact-bar.medium span { background: var(--impact-medium); }
+  .impact-bar.medium span:nth-child(n+4) { background: #ddd; }
+  .impact-bar.low span { background: var(--impact-low); }
+  .impact-bar.low span:nth-child(n+3) { background: #ddd; }
+
+  .impact-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .impact-label.high { color: var(--impact-high); }
+  .impact-label.medium { color: var(--impact-medium); }
+  .impact-label.low { color: var(--impact-low); }
+
+  .links-section {
+    margin: var(--spacing-lg);
+    padding-top: var(--spacing-md);
+    border-top: 2px solid var(--header-bg);
+  }
+
+  .links-section h2 {
+    font-size: 1rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--header-bg);
+  }
+
+  .links-section ol {
+    padding-left: var(--spacing-lg);
+    font-size: 0.85rem;
+  }
+
+  .links-section li {
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .links-section a {
+    color: var(--cat-nation);
+    text-decoration: none;
+  }
+
+  .links-section a:hover { text-decoration: underline; }
+
+  footer {
+    background: var(--header-bg);
+    color: rgba(255,255,255,0.7);
+    text-align: center;
+    padding: var(--spacing-md);
+    font-size: 0.8rem;
+    margin-top: var(--spacing-lg);
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: var(--spacing-xxl);
+    color: var(--text-secondary);
+  }
+
+  .empty-state p { font-size: 1.1rem; margin-bottom: var(--spacing-sm); }
+
+  /* 모바일 반응형 */
+  @media (max-width: 768px) {
+    header h1 { font-size: 1.4rem; }
+    .categories { grid-template-columns: 1fr; }
+    .category { margin-bottom: 0; }
+    .executive-summary { margin: var(--spacing-md); padding: var(--spacing-md); }
+    .links-section { margin: var(--spacing-md); }
+  }
+
+  /* 인쇄 최적화 */
+  @media print {
+    body { max-width: none; }
+    header { background: white !important; color: black !important; border-bottom: 3px solid black; }
+    header .subtitle { color: #333; }
+    .categories { grid-template-columns: 1fr; }
+    .category-header { color: black !important; background: #eee !important; }
+    .fallback-banner { background: #eee !important; color: black !important; }
+    footer { background: white !important; color: black !important; border-top: 1px solid black; }
+    a::after { content: " (" attr(href) ")"; font-size: 0.7rem; color: #666; }
+    .impact-bar span { border: 1px solid #999; }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1>사이버전 일일 브리핑</h1>
+    <div class="subtitle">Cyber Warfare Daily Briefing</div>
+    <div class="date-line">{{ date_str }} | 제{{ issue_number }}호 | 소스: {{ source_count }}개</div>
+  </header>
+
+  {% if is_fallback %}
+  <div class="fallback-banner">⚠ AI 요약 미사용 (원문 기반) — Claude Code 연결 실패로 원문 데이터를 표시합니다</div>
+  {% endif %}
+
+  {% if not articles %}
+  <div class="empty-state">
+    <p>오늘 수집된 사이버전 관련 뉴스가 없습니다.</p>
+    <p style="font-size: 0.85rem;">{{ source_count }}개 소스에서 수집을 시도했습니다.</p>
+  </div>
+  {% else %}
+
+  <section class="executive-summary">
+    <h2>★ 오늘의 핵심 (Executive Summary)</h2>
+    <ul>
+      {% for item in executive_summary %}
+      <li>{{ item }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <div class="categories">
+    {% for cat_id, cat_name in [("cyber_attack", "🔴 사이버공격/사건"), ("nation_state", "🔵 국가 사이버전 동향"), ("policy", "🟢 정책/규제"), ("tech", "🟡 기술동향/취약점")] %}
+    {% set cat_articles = articles | selectattr("category", "equalto", cat_id) | list %}
+    {% if cat_articles %}
+    <section class="category">
+      <div class="category-header {{ cat_id }}">{{ cat_name }}</div>
+      {% for a in cat_articles %}
+      <article>
+        <h3><a href="{{ a.link }}" target="_blank" rel="noopener">{{ a.title }}</a></h3>
+        {% if a.summary %}
+        <p class="summary">{{ a.summary }}</p>
+        {% endif %}
+        <div class="meta">
+          <span>{{ a.source }}</span>
+          <span>
+            <span class="impact-bar {{ a.impact }}">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
+            <span class="impact-label {{ a.impact }}">
+              {% if a.impact == "high" %}높음{% elif a.impact == "medium" %}중간{% else %}낮음{% endif %}
+            </span>
+          </span>
+        </div>
+      </article>
+      {% endfor %}
+    </section>
+    {% endif %}
+    {% endfor %}
+  </div>
+
+  <section class="links-section">
+    <h2>원문 링크 목록</h2>
+    <ol>
+      {% for a in articles %}
+      <li><a href="{{ a.link }}" target="_blank" rel="noopener">{{ a.title }}</a> — {{ a.source }}</li>
+      {% endfor %}
+    </ol>
+  </section>
+  {% endif %}
+
+  <footer>
+    발행: cyber-news v1.0 | {{ date_str }} | {{ total_articles }}건 수집
+  </footer>
+</body>
+</html>
